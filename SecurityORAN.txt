@@ -1,36 +1,21 @@
-﻿Architecture-related Risks for 5G/6G Security
-The 5G (and prospective 6G) architecture components and related risks
-are the following:
-» Service-Based Architecture (SBA), decomposed, virtualized, and
-distributed network functions. The independence of network functions
-from infrastructure poses challenges for network security.
-» Application Programming Interfaces (API). Poorly encrypted,
-inadequately secured APIs put network resources at risk of attack.
-» Private and corporate 5G networks. Such networks, if not adequately
-protected, can be a source of attacks for the network segments to which
-they are connected.
-» Multi-Access Edge Computing (MEC) [19]. Security management
-becomes difficult in decentralized information processing, such as edge
-computing, as significant network parts can be attacked anywhere.
-» Radio Access Network (RAN) and Open-RAN. The radio segment of the
-mobile communication network is inherently exposed to attacks related
-to the omnipresent transmission medium. The open specification of
-the radio interface (O-RAN) introduced in the 5G network [1,2] poses a
-challenge to their security. Inadequately defined and poorly secured
-O-RAN applications, e.g., in the physical or MAC layer, may be vulnerable
-to these attacks.
+**Architecture-related Risks for 5G/6G Security**
 
+The architecture components and associated risks in 5G (and prospective 6G) are as follows:
 
-The first three 5G security issues are similar to general software architec-
-ture and applications security problems. The last two strictly address RAN
-and its novel features, including its openness and intelligence. 
+1. **Service-Based Architecture (SBA):** Decomposed, virtualized, and distributed network functions pose challenges for network security as the independence of network functions from infrastructure can lead to vulnerabilities.
 
+2. **Application Programming Interfaces (API):** Poorly encrypted or inadequately secured APIs can jeopardize network resources, making them susceptible to attacks.
 
-Signalling Storm
- KPI profiles [28] that are created in Near-RT RIC and updated dynamically. Based on the monitoring of Random Access Responses, the KPI profile can capture statistics of the network access requests and Timing Advance (TA) parameters of each UE. In particular, IoT devices have this kind of profile and statistics constant. Based on the KPI profile and the currently observed number of access requests, the so-called anomaly values (or metrics) are calculated and then input to a weighted version of the DBSCAN grouping algorithm. The algorithm decides on the presence or absence of a Signaling Storm attack. In this case, the threat analysis determines the adversary's approximate distance from gNodeB (E2 Node). In the case of adversary UEs, an increased number of Msg2: Random Access Response messages containing the same TA parameter measured by gNodeB (E2 Node) will be observed. 
-Connection requests associated with a given TA may be rejected.
+3. **Private and Corporate 5G Networks:** If not adequately protected, these networks can become sources of attacks for the network segments they are connected to, compromising overall network security.
 
+4. **Multi-Access Edge Computing (MEC):** Security management becomes challenging in decentralized information processing, such as edge computing, as significant network parts can be vulnerable to attacks from various locations.
 
-  
+5. **Radio Access Network (RAN) and Open-RAN:** The inherent exposure of the radio segment to attacks related to the transmission medium poses significant security challenges. Additionally, the open specification of the radio interface (O-RAN) introduced in the 5G network raises concerns about the security of O-RAN applications, particularly in the physical or MAC layer.
 
-two phases: the training phase and the inference phase. The training phase aims to build KPI profiles based on the Random Access responses forwarded to the Near-RT RIC from E2 Node (gNodeB) via the E2 interface. Within this phase, tuning the detection algorithm’s parameters is also done, e.g., adjusting the threshold for the anomaly metric above which the attack will be detected. In the inference phase, detection of the adversary's presence takes place already at the level of the access network. It only requires the collection of Msg2 messages for a period corresponding to the KPI profile validity. If the adversary activity is detected, the xApp utilizes the E2 interface to notify the gNodeB (E2 Node) to reject connection requests from a given UE, i.e., to send an RRC Connection Reject message to stop UE authentication within the core network.
+The first three issues are akin to general software architecture and application security problems, while the last two specifically address RAN and its novel features, including openness and intelligence.
+
+**Signaling Storm**
+
+In detecting a Signaling Storm attack, KPI profiles are crucial. These profiles, generated in Near-RT RIC and updated dynamically, capture statistics of network access requests and Timing Advance (TA) parameters of each User Equipment (UE), particularly applicable to IoT devices. Anomaly values are calculated based on these profiles and the observed number of access requests, using a weighted version of the DBSCAN grouping algorithm. The algorithm determines the presence or absence of a Signaling Storm attack and approximates the adversary's distance from the gNodeB (E2 Node). An increased number of Msg2: Random Access Response messages containing the same TA parameter measured by the gNodeB (E2 Node) indicates adversary UEs. Connection requests associated with a given TA may be rejected.
+
+The detection process comprises two phases: the training phase and the inference phase. In the training phase, KPI profiles are built based on Random Access responses forwarded to Near-RT RIC from the gNodeB via the E2 interface. Parameters of the detection algorithm, such as the anomaly metric threshold, are adjusted during this phase. In the inference phase, detection occurs at the access network level, requiring the collection of Msg2 messages for a period corresponding to the KPI profile validity. If adversary activity is detected, the xApp utilizes the E2 interface to notify the gNodeB (E2 Node) to reject connection requests from the identified UE, halting UE authentication within the core network.
